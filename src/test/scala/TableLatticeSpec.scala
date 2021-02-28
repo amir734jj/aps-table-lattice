@@ -56,9 +56,23 @@ class TableLatticeSpec extends AnyFlatSpec with should.Matchers {
     t_DeclarationTable.v_compare(table1, table2) should be (true)
   }
 
+  "v_compare" should "return false when it both tables are empty" in {
+    val table1: Testbed.T_DeclarationTable = tableLattice(Map())
+    val table2 = tableLattice(Map())
+
+    t_DeclarationTable.v_compare(table1, table2) should be (false)
+  }
+
   "v_compare_equal" should "return true when it is subset" in {
     val table1: Testbed.T_DeclarationTable = tableLattice(Map('A -> toSymbolSet(1, 2), 'B -> toSymbolSet(3, 4)))
     val table2 = tableLattice(Map('B -> toSymbolSet(1, 2, 3, 4)))
+
+    t_DeclarationTable.v_compare_equal(table1, table2) should be (true)
+  }
+
+  "v_compare_equal" should "return true when it both tables are empty" in {
+    val table1: Testbed.T_DeclarationTable = tableLattice(Map())
+    val table2 = tableLattice(Map())
 
     t_DeclarationTable.v_compare_equal(table1, table2) should be (true)
   }
